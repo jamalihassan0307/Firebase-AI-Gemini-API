@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini API Documentation</title>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <link rel="stylesheet" href="/src/styles/api-docs.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="api-container">
+      <aside class="api-sidebar">
+        <h2>API Reference</h2>
+        <nav>
+          <a href="#introduction" class="active">Introduction</a>
+          <a href="#authentication">Authentication</a>
+          <a href="#chat-endpoint">Chat Endpoint</a>
+          <a href="#code-conversion">Code Conversion</a>
+          <a href="#examples">Examples</a>
+        </nav>
+      </aside>
+
+      <main class="api-content">
+        <section id="introduction">
+          <h1>Gemini AI API Documentation</h1>
+          <p>
+            Welcome to the Gemini AI API documentation. This API allows you to
+            interact with our AI model for chat and code conversion
+            capabilities.
+          </p>
+        </section>
+
+        <section id="authentication">
+          <h2>Authentication</h2>
+          <div class="api-card">
+            <h3>API Key</h3>
+            <p>All requests require an API key passed in the headers:</p>
+            <pre><code class="language-javascript">{
+  "Authorization": "Bearer YOUR_API_KEY"
+}</code></pre>
+          </div>
+        </section>
+
+        <section id="chat-endpoint">
+          <h2>Chat Endpoint</h2>
+          <div class="api-card">
+            <h3>POST /api/chat</h3>
+            <p>Send a message to the AI and receive a response.</p>
+
+            <h4>Request</h4>
+            <pre><code class="language-javascript">{
+  "message": "Hello, how can you help me?",
+  "context": "optional previous messages for context"
+}</code></pre>
+
+            <h4>Response</h4>
+            <pre><code class="language-javascript">{
+  "response": "I'm an AI assistant powered by Gemini...",
+  "timestamp": 1645564789000
+}</code></pre>
+
+            <h4>Example Usage</h4>
+            <pre><code class="language-javascript">fetch('https://your-api.com/api/chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_API_KEY'
+  },
+  body: JSON.stringify({
+    message: 'Hello, how can you help me?'
+  })
+})</code></pre>
+          </div>
+        </section>
+
+        <section id="code-conversion">
+          <h2>Code Conversion</h2>
+          <div class="api-card">
+            <h3>POST /api/convert</h3>
+            <p>Convert code between different programming languages.</p>
+
+            <h4>Request</h4>
+            <pre><code class="language-javascript">{
+  "code": "your code here",
+  "fromLanguage": "python",
+  "toLanguage": "javascript"
+}</code></pre>
+
+            <h4>Response</h4>
+            <pre><code class="language-javascript">{
+  "convertedCode": "converted code here",
+  "language": "javascript"
+}</code></pre>
+          </div>
+        </section>
+
+        <section id="examples">
+          <h2>Examples</h2>
+          <div class="api-card">
+            <h3>Chat Example</h3>
+            <pre><code class="language-typescript">import { GeminiService } from './services/gemini.service';
+
+const gemini = new GeminiService('YOUR_API_KEY');
+
+async function chat() {
+  try {
+    const response = await gemini.generateResponse(
+      'Explain how to use the Gemini API'
+    );
+    console.log(response);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}</code></pre>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  </body>
+</html>
