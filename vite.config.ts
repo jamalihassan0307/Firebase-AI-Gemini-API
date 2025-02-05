@@ -4,16 +4,22 @@ export default defineConfig({
   root: '.',
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
+    minify: 'terser',
     sourcemap: true,
     rollupOptions: {
       input: {
         main: './index.html',
         api: './api.html',
       },
+      output: {
+        manualChunks: {
+          vendor: ['@google/generative-ai'],
+        },
+      },
     },
   },
   server: {
-    port: 5173,
+    port: 3000,
+    open: true,
   },
 });
