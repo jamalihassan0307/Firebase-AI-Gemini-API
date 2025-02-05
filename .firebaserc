@@ -1,1 +1,5 @@
-{"projects":{"default":"sample-firebase-ai-app-dd0ad"}}
+{
+  "projects": {
+    "default": "sample-firebase-ai-app-dd0ad"
+  }
+}

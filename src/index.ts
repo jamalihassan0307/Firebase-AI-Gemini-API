@@ -3,7 +3,7 @@ import { environment } from './environment';
 import { ChatComponent } from './components/Chat';
 
 // Initialize Firebase
-const app = initializeApp(environment.firebase);
+initializeApp(environment.firebase);
 
 // Initialize Chat Component
 const chat = new ChatComponent();

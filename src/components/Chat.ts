@@ -66,22 +66,69 @@ export class ChatComponent {
         chat.id === this.currentChat?.id ? ' active' : ''
       }`;
 
-      const title =
-        chat.messages.length > 0
-          ? chat.messages[0].content.slice(0, 30) + '...'
-          : 'New Chat';
-
       chatElement.innerHTML = `
-        <svg stroke="currentColor" fill="none" viewBox="0 0 24 24">
-          <path d="M8 10h8M8 14h4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke-width="1.5"/>
-        </svg>
-        <span>${title}</span>
+        <div class="chat-item-content">
+          <input 
+            type="text" 
+            class="chat-title-input" 
+            value="${chat.title}"
+            ${chat.id === this.currentChat?.id ? 'autofocus' : ''}
+          >
+          <button class="delete-chat" title="Delete chat">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M6 18L18 6M6 6l12 12" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
       `;
+
+      // Add event listeners
+      const titleInput = chatElement.querySelector(
+        '.chat-title-input'
+      ) as HTMLInputElement;
+      const deleteBtn = chatElement.querySelector(
+        '.delete-chat'
+      ) as HTMLButtonElement;
+
+      titleInput.addEventListener('change', (e) => {
+        const newTitle = (e.target as HTMLInputElement).value.trim();
+        this.updateChatTitle(chat.id, newTitle);
+      });
+
+      titleInput.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent chat selection when clicking input
+      });
+
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deleteChat(chat.id);
+      });
 
       chatElement.addEventListener('click', () => this.loadChat(chat.id));
       this.chatHistory.appendChild(chatElement);
     });
+  }
+
+  private updateChatTitle(chatId: string, newTitle: string): void {
+    const chat = this.storageService.getChatById(chatId);
+    if (chat) {
+      chat.title = newTitle || 'Untitled Chat';
+      this.storageService.saveChat(chat);
+      this.loadChats();
+    }
+  }
+
+  private async deleteChat(chatId: string): Promise<void> {
+    if (confirm('Are you sure you want to delete this chat?')) {
+      this.storageService.deleteChat(chatId);
+
+      if (this.currentChat?.id === chatId) {
+        this.currentChat = null;
+        this.renderMessages();
+      }
+
+      await this.loadChats();
+    }
   }
 
   private async loadChat(chatId: string): Promise<void> {
@@ -133,8 +180,43 @@ export class ChatComponent {
     messageElement.scrollIntoView({ behavior: 'smooth' });
   }
 
+  private renderWelcomeMessage(): void {
+    const welcomeHtml = `
+      <div class="welcome-message">
+        <h1>Gemini AI Chat</h1>
+        <p>How can I help you today?</p>
+        
+        <div class="guidelines">
+          <h2>Privacy & Guidelines</h2>
+          <ul>
+            <li>
+              <strong>Privacy First:</strong> Your conversations are not stored beyond the current session.
+            </li>
+            <li>
+              <strong>Safe & Accurate:</strong> We provide helpful and factual responses, but please verify sensitive information.
+            </li>
+            <li>
+              <strong>Comprehensive Support:</strong> Expect detailed, well-structured answers to your questions.
+            </li>
+            <li>
+              <strong>Safe Content:</strong> We maintain a respectful environment and avoid harmful content.
+            </li>
+            <li>
+              <strong>Professional Advice:</strong> For medical, legal, or psychological matters, please consult qualified professionals.
+            </li>
+          </ul>
+        </div>
+      </div>
+    `;
+
+    this.messagesContainer.innerHTML = welcomeHtml;
+  }
+
   private renderMessages(): void {
-    if (!this.currentChat) return;
+    if (!this.currentChat) {
+      this.renderWelcomeMessage();
+      return;
+    }
 
     this.messagesContainer.innerHTML = '';
     this.currentChat.messages.forEach((message) => this.renderMessage(message));

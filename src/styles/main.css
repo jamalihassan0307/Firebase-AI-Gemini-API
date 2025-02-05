@@ -338,3 +338,86 @@ strong {
   color: var(--primary-color);
   font-weight: 600;
 }
+
+.chat-item-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.chat-title-input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: inherit;
+  padding: 0.25rem;
+  flex: 1;
+  min-width: 0;
+  border-radius: 0.25rem;
+}
+
+.chat-title-input:hover,
+.chat-title-input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.delete-chat {
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  color: inherit;
+}
+
+.delete-chat svg {
+  width: 16px;
+  height: 16px;
+}
+
+.chat-history-item:hover .delete-chat {
+  opacity: 0.7;
+}
+
+.delete-chat:hover {
+  opacity: 1 !important;
+  color: #ef4444;
+}
+
+.guidelines {
+  margin-top: 2rem;
+  text-align: left;
+  background: var(--input-background);
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  max-width: 800px;
+  margin: 2rem auto 0;
+}
+
+.guidelines h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+}
+
+.guidelines ul {
+  list-style: none;
+  padding: 0;
+}
+
+.guidelines li {
+  margin: 1rem 0;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.guidelines strong {
+  color: var(--primary-color);
+  font-weight: 600;
+  white-space: nowrap;
+}

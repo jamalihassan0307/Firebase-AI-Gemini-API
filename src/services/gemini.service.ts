@@ -17,43 +17,32 @@ export class GeminiService {
   }
 
   private formatResponse(text: string): string {
-    // First, handle bold text with **
-    text = text.replace(/\*\*(.*?)\*\*/g, '<br><strong>$1</strong><br>');
+    if (!text) return '';
+
+    // Handle bold text (**bold**)
+    text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // Handle italic text (*italic*)
+    text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
 
     // Handle definition blocks
     text = text.replace(
-      /\*\*Definition:\*\*(.*?)(?=\*\*|$)/g,
-      '<div class="definition-block"><br><h3>Definition:</h3><br>$1<br></div>'
+      /\*\*Definition:\*\*(.*?)(?=\n|$)/gs,
+      '<div class="definition-block"><h3>Definition:</h3><p>$1</p></div>'
     );
 
-    // Handle component lists
-    text = text.replace(
-      /\*\*Components:\*\*\s*\*(.*?)(?=\*\*|$)/gs,
-      (match, content) => {
-        const listItems = content
-          .split('*')
-          .filter((item: string) => item.trim())
-          .map((item: string) => `<li>${item.trim()}</li>`)
-          .join('');
-        return `<div class="components-block">
-          <br><h3>Components:</h3><br>
-          <ul>${listItems}</ul><br>
-        </div>`;
-      }
-    );
-
-    // Handle other sections
+    // Handle sections with lists
     text = text.replace(
       /\*\*(.*?):\*\*\s*\*(.*?)(?=\*\*|$)/gs,
-      (match, title, content) => {
+      (_match: string, title: string, content: string) => {
         const listItems = content
           .split('*')
           .filter((item: string) => item.trim())
           .map((item: string) => `<li>${item.trim()}</li>`)
           .join('');
         return `<div class="section-block">
-          <br><h3>${title}:</h3><br>
-          <ul>${listItems}</ul><br>
+          <h3>${title}:</h3>
+          <ul>${listItems}</ul>
         </div>`;
       }
     );
@@ -63,14 +52,54 @@ export class GeminiService {
 
   async generateResponse(prompt: string): Promise<string> {
     try {
-      const result = await this.model.generateContent(prompt);
+      const enhancedPrompt = `
+Please provide a clear and structured response following these guidelines:
+
+1. Start with a Definition:
+- One clear, concise sentence explaining the concept
+- Bold key terms using **term**
+
+2. Main Points (2-3 only):
+- Focus on essential information
+- Use bullet points for clarity
+- Keep each point to one line
+
+3. Practical Examples:
+- Give 1-2 real-world examples
+- Keep examples relevant and simple
+
+4. Code Example (if relevant):
+- Use proper formatting: \`\`\`language
+- Keep code under 10 lines
+- Include brief comments
+- Show practical usage
+
+5. Response Format:
+**Definition:**
+[Your one-line definition]
+
+**Key Points:**
+• [First key point]
+• [Second key point]
+• [Third key point]
+
+**Examples:**
+• [First example]
+• [Second example]
+
+**Code Sample:**
+\`\`\`[language]
+[Your concise code example]
+\`\`\`
+
+User Query: ${prompt}
+`;
+
+      const result = await this.model.generateContent(enhancedPrompt);
       const response = await result.response;
       let text = response.text();
 
-      // Format text content
       text = this.formatResponse(text);
-
-      // Format code blocks if present
       text = this.formatCodeBlocks(text);
 
       return text;
@@ -104,7 +133,6 @@ export class GeminiService {
       formattedText = formattedText.replace(match[0], formattedBlock);
     }
 
-    // Trigger Prism highlighting after adding code blocks
     setTimeout(() => {
       if (typeof window !== 'undefined' && window.Prism) {
         window.Prism.highlightAll();

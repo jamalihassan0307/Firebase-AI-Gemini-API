@@ -1,4 +1,4 @@
-import { Chat, Message } from '../types/chat.types';
+import { Chat } from '../types/chat.types';
 
 export class StorageService {
   private readonly CHATS_KEY = 'gemini_chats';
