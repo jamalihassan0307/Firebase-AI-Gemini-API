@@ -1,14 +1,12 @@
 export const environment = {
   firebase: {
-    apiKey: 'AIzaSyDuPI2i081bDHcYMOEvOURDKyaIm9O8OQI',
-    authDomain: 'sample-firebase-ai-app-dd0ad.firebaseapp.com',
-    databaseURL: '',
-    projectId: 'sample-firebase-ai-app-dd0ad',
-    storageBucket: 'sample-firebase-ai-app-dd0ad.firebasestorage.app',
-    messagingSenderId: '654005918721',
-    appId: '1:654005918721:web:0781dcb9dc193502dbb400',
-    measurementId: '',
+    apiKey: import.meta.env['VITE_FIREBASE_API_KEY'],
+    authDomain: import.meta.env['VITE_FIREBASE_AUTH_DOMAIN'],
+    projectId: import.meta.env['VITE_FIREBASE_PROJECT_ID'],
+    storageBucket: import.meta.env['VITE_FIREBASE_STORAGE_BUCKET'],
+    messagingSenderId: import.meta.env['VITE_FIREBASE_MESSAGING_SENDER_ID'],
+    appId: import.meta.env['VITE_FIREBASE_APP_ID'],
   },
-  gemini_api_key: 'AIzaSyBdcBFODMDOZOidyb6Kj01gaE-taaoEyhM',
+  gemini_api_key: import.meta.env['VITE_GEMINI_API_KEY'],
   debug_token: '',
 };

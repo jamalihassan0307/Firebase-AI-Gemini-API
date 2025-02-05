@@ -11,7 +11,9 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.1.0"
+    "@google/generative-ai": "^0.1.0",
+    "@types/firebase": "^2.4.32",
+    "firebase": "^11.2.0"
   },
   "devDependencies": {
     "firebase-tools": "^12.0.0",
