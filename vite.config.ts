@@ -12,11 +12,6 @@ export default defineConfig({
         api: './api.html',
         developer: './developer.html',
       },
-      output: {
-        manualChunks: {
-          vendor: ['@google/generative-ai'],
-        },
-      },
     },
   },
   server: {
@@ -27,6 +22,6 @@ export default defineConfig({
     },
   },
   css: {
-    postcss: './postcss.config.js',
+    postcss: './postcss.config.cjs',
   },
 });

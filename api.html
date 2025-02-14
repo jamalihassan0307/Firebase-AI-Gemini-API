@@ -24,7 +24,7 @@
       }
 
       .method {
-        color: #61affe;
+        color: var(--primary-color);
         font-weight: bold;
       }
 
@@ -48,25 +48,62 @@
         white-space: pre-wrap;
       }
 
+      .menu-button svg {
+        width: 24px;
+        height: 24px;
+      }
+
       .nav-bar {
         background-color: #1e1e1e;
         padding: 1rem;
-        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: var(--nav-height);
       }
 
       .nav-content {
-        max-width: 800px;
+        max-width: 1200px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
       .nav-logo {
-        color: #ffffff;
+        color: var(--text-color);
         text-decoration: none;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: bold;
+      }
+
+      .menu-button {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        transition: opacity 0.3s ease;
+      }
+
+      .menu-button:hover {
+        opacity: 0.8;
+      }
+
+      .menu-button svg {
+        width: 24px;
+        height: 24px;
       }
 
       .nav-links {
@@ -75,18 +112,20 @@
       }
 
       .nav-link {
-        color: #ffffff;
+        color: var(--text-color);
         text-decoration: none;
         padding: 0.5rem 1rem;
-        border-radius: 4px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
       }
 
       .nav-link:hover {
-        background-color: #2d2d2d;
+        background-color: rgba(255, 255, 255, 0.1);
       }
 
       .nav-link.active {
-        background-color: #2d2d2d;
+        background-color: var(--primary-color);
+        color: #1e1e1e;
       }
     </style>
   </head>
@@ -94,6 +133,16 @@
     <nav class="nav-bar">
       <div class="nav-content">
         <div class="nav-left">
+          <button class="menu-button" id="menuToggle">
+            <svg stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <path
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
           <a href="/" class="nav-logo">AI Chat</a>
         </div>
         <div class="nav-links">
