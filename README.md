@@ -118,10 +118,6 @@ Gemini AI Chat is a modern chat interface that leverages the power of Google's G
 - Privacy guidelines and usage instructions
 - Clear navigation structure
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Developer
 
 Developed with ❤️ by [Ali Hassan](https://jamalihassan0307.github.io/portfolio.github.io/#!/)
