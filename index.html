@@ -11,6 +11,19 @@
     />
   </head>
   <body>
+    <nav class="nav-bar">
+      <div class="nav-content">
+        <div class="nav-left">
+          <a href="/" class="nav-logo">AI Chat</a>
+        </div>
+        <div class="nav-links">
+          <a href="/" class="nav-link active">Home</a>
+          <a href="/api.html" class="nav-link">API</a>
+          <a href="/developer.html" class="nav-link">Developer</a>
+        </div>
+      </div>
+    </nav>
+
     <div class="chat-container">
       <aside class="sidebar">
         <button class="new-chat">
@@ -28,9 +41,6 @@
       </aside>
 
       <main class="main-content">
-        <div class="header">
-          <a href="/api.html" class="api-link">API Documentation</a>
-        </div>
         <div class="chat-messages" id="chat-messages">
           <div class="welcome-message">
             <h1>Gemini AI Chat</h1>
@@ -47,7 +57,7 @@
               autofocus
             ></textarea>
             <button id="send-button">
-              <svg stroke="currentColor" fill="none" viewBox="0 0 24 24">
+              <svg stroke="currentColor" fill="none" viewBox="0 0 20 20">
                 <path
                   d="M6 12h12m0 0l-5-5m5 5l-5 5"
                   stroke-width="1.5"
@@ -58,8 +68,13 @@
             </button>
           </div>
           <div class="disclaimer">
-            Gemini may produce inaccurate information about people, places, or
-            facts.
+            <p>Developed by Ali Hassan</p>
+            <button
+              class="profile-button"
+              onclick="window.location.href='/developer.html'"
+            >
+              View Profile
+            </button>
           </div>
         </div>
       </main>

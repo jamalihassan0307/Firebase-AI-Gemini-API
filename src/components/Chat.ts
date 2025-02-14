@@ -21,8 +21,30 @@ export class ChatComponent {
     ) as HTMLTextAreaElement;
     this.chatHistory = document.querySelector('.chat-history') as HTMLElement;
 
+    this.setupMobileMenu();
     this.initializeEventListeners();
     this.loadChats();
+  }
+
+  private setupMobileMenu(): void {
+    const menuToggle = document.getElementById('menuToggle');
+    const navBar = document.querySelector('.nav-bar');
+    const sidebar = document.querySelector('.sidebar');
+
+    menuToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navBar?.classList.toggle('mobile-menu-open');
+      sidebar?.classList.toggle('active');
+    });
+
+    // Close menu and sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.nav-bar') && !target.closest('.sidebar')) {
+        navBar?.classList.remove('mobile-menu-open');
+        sidebar?.classList.remove('active');
+      }
+    });
   }
 
   private initializeEventListeners(): void {

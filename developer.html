@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Developer - Gemini AI Chat</title>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+    <style>
+      .developer-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2rem;
+        min-height: calc(100vh - 64px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .developer-profile {
+        text-align: center;
+        padding: 3rem;
+        background-color: #1e1e1e;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 800px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .profile-image {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        margin-bottom: 1.5rem;
+        border: 4px solid #61affe;
+        box-shadow: 0 4px 12px rgba(97, 175, 254, 0.2);
+        transition: transform 0.3s ease;
+      }
+
+      .profile-image:hover {
+        transform: scale(1.05);
+      }
+
+      .developer-profile h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(45deg, #61affe, #4a8cd1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .developer-title {
+        color: #61affe;
+        margin-bottom: 2rem;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin: 2rem 0;
+      }
+
+      .social-icon {
+        background-color: #2d2d2d;
+        padding: 0.8rem;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+      }
+
+      .social-icon img {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.3s ease;
+      }
+
+      .social-icon:hover {
+        background-color: #3d3d3d;
+        transform: translateY(-5px);
+      }
+
+      .portfolio-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(45deg, #61affe, #4a8cd1);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        margin: 1.5rem 0;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .portfolio-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(97, 175, 254, 0.3);
+      }
+
+      .disclaimer-text {
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #333;
+      }
+
+      .disclaimer-text p {
+        color: #888;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+      }
+
+      .warning {
+        color: #ff6b6b;
+        font-size: 0.85rem;
+      }
+
+      /* Navigation Styles */
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .menu-button {
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        transition: opacity 0.3s ease;
+      }
+
+      .menu-button:hover {
+        opacity: 0.8;
+      }
+
+      .menu-button svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .nav-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background-color: rgba(30, 30, 30, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .nav-logo {
+        font-size: 1.3rem;
+        font-weight: bold;
+      }
+
+      .nav-link {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: #2d2d2d;
+      }
+
+      .nav-link.active {
+        background-color: #61affe;
+        color: #1e1e1e;
+      }
+
+      body {
+        padding-top: 64px;
+        background-color: #121212;
+      }
+
+      @media (max-width: 768px) {
+        .developer-container {
+          padding: 1rem;
+        }
+
+        .developer-profile {
+          padding: 2rem 1.5rem;
+        }
+
+        .profile-image {
+          width: 150px;
+          height: 150px;
+        }
+
+        .developer-profile h1 {
+          font-size: 2rem;
+        }
+
+        .social-links {
+          gap: 1rem;
+        }
+
+        .nav-links {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <div class="nav-content">
+        <div class="nav-left">
+          <a href="/" class="nav-logo">AI Chat</a>
+        </div>
+        <div class="nav-links">
+          <a href="/" class="nav-link">Home</a>
+          <a href="/api.html" class="nav-link">API</a>
+          <a href="/developer.html" class="nav-link active">Developer</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="developer-container">
+      <div class="developer-profile">
+        <img src="/alihassan.jpg" alt="Ali Hassan" class="profile-image" />
+        <h1>Ali Hassan</h1>
+        <p class="developer-title">Full Stack Developer</p>
+
+        <div class="social-links">
+          <a
+            href="https://wa.me/923073921189"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon whatsapp"
+            title="WhatsApp"
+          >
+            <img
+              src="https://user-images.githubusercontent.com/74038190/235294019-40007353-6219-4ec5-b661-b3c35136dd0b.gif"
+              alt="WhatsApp"
+            />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ali-hassan-b17815281/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon linkedin"
+            title="LinkedIn"
+          >
+            <img
+              src="https://user-images.githubusercontent.com/74038190/235294012-0a55e343-37ad-4b0f-924f-c8431d9d2483.gif"
+              alt="LinkedIn"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/jamali.hassan.946"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon facebook"
+            title="Facebook"
+          >
+            <img
+              src="https://user-images.githubusercontent.com/74038190/235294010-ec412ef5-e3da-4efa-b1d4-0ab4d4638755.gif"
+              alt="Facebook"
+            />
+          </a>
+          <a
+            href="mailto:jamalihassan0307@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-icon email"
+            title="Email"
+          >
+            <img
+              src="https://github.com/AkashSingh3031/AkashSingh3031/blob/main/images/Social%20Media/Gmail_icon_(2020).svg"
+              alt="Email"
+            />
+          </a>
+        </div>
+
+        <a
+          href="https://jamalihassan0307.github.io/portfolio.github.io/#!/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="portfolio-link"
+        >
+          View Full Portfolio
+        </a>
+
+        <div class="disclaimer-text">
+          <p>Developed by Ali Hassan</p>
+          <p class="warning">
+            Gemini may produce inaccurate information about people, places, or
+            facts.
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         main: './index.html',
         api: './api.html',
+        developer: './developer.html',
       },
       output: {
         manualChunks: {
@@ -21,5 +22,11 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true,
+    hmr: {
+      overlay: true,
+    },
+  },
+  css: {
+    postcss: './postcss.config.js',
   },
 });

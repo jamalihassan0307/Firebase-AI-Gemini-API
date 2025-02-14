@@ -25,8 +25,6 @@
     "sourceMap": true,
     "declaration": false,
     "importHelpers": true,
-    "module": "ESNext",
-    "allowImportingTsExtensions": true,
     "paths": {
       "@google/generative-ai": ["./node_modules/@google/generative-ai"]
     },
